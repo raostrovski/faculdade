@@ -28,13 +28,20 @@ void inserirFinal(int elemen){
 
     no *aux = plista;
     no *auxUltimo;
-    while(aux->prox != NULL){
+    if(aux == NULL){
+
+        inserirInicio(elemen);
+
+    } else {
+
+        while(aux->prox != NULL){
         aux = aux->prox;
+        }
+        auxUltimo       = (no*) malloc(sizeof(no));
+        auxUltimo->info = elemen;
+        auxUltimo->prox = aux->prox;
+        aux->prox       = auxUltimo;
     }
-    auxUltimo       = (no*) malloc(sizeof(no));
-    auxUltimo->info = elemen;
-    auxUltimo->prox = aux->prox;
-    aux->prox       = auxUltimo;
 }
 
 void inserirOrdenado(int elemen){
@@ -87,26 +94,37 @@ void mostrarLista(){
 void removerInicio(){
 
     no *aux = plista;
-    aux     = aux->prox;
-    plista  = aux;
-    aux     = NULL;
+    if(aux == NULL){
 
+        printf("Não existe lista\n");
+    } else {
+        aux     = aux->prox;
+        plista  = aux;
+        aux     = NULL;
+        printf("Valor removido do inicio\n");
+    }
 }
 
 void removerFinal(){
 
     no *aux = plista;
     no *auxUltimo = plista;
-    while(aux->prox != NULL){
-        aux = aux->prox;
+    if(aux == NULL){
 
+        printf("Não existe lista\n");
+
+    } else {
+
+        while(aux->prox != NULL){
+            aux = aux->prox;
+        }
+
+        while(auxUltimo->prox != aux){
+            auxUltimo = auxUltimo->prox;
+        }
+        auxUltimo->prox = NULL;
+        printf("Removido primeiro elemento da lista.\n");
     }
-
-    while(auxUltimo->prox != aux){
-        auxUltimo = auxUltimo->prox;
-    }
-    auxUltimo->prox = NULL;
-
 }
 
 void removerEspecifico(int elemen){
@@ -114,25 +132,32 @@ void removerEspecifico(int elemen){
     int posicao = 1;
     no *aux = plista;
     no *aux2 = plista;
-    while(posicao != elemen){
-        aux = aux->prox;
-        posicao++;
-    }
-    if(elemen == 1){
+    if(aux == NULL){
 
-        removerInicio();
+        printf("Não existe lista\n");
 
     } else {
 
-        while(aux2->prox != aux){
-        aux2 = aux2->prox;
+        while(posicao != elemen){
+        aux = aux->prox;
+        posicao++;
+        }
+        if(elemen == 1){
 
+            removerInicio();
+
+        } else {
+
+            while(aux2->prox != aux){
+            aux2 = aux2->prox;
+
+            }
+
+            aux2->prox = aux->prox;
+            aux->prox = NULL;
+            printf("Removido elemento da lista.\n");
         }
     }
-
-    aux2->prox = aux->prox;
-    aux->prox = NULL;
-
 }
 
 int buscarElemento(int elemen){
@@ -148,15 +173,13 @@ int buscarElemento(int elemen){
     return 0;
 }
 
-
-
-
 int main()
 {
     int escolha, valor, retornoBusca = 0;
+    plista = NULL;
     char encerrar[] = "N";
     while((strcmp(encerrar,"N") == 0 || strcmp(encerrar,"n") == 0)){
-        printf("Selecione a informacao desejada.:\n1. Inserir no inicio\n2. Inserir no final\n3. Inserir ordernado\n4. Mostrar lista\n5. Remover do inicio\n6. Remover do final\n7. Remover elemento especifico\n8. Buscar elemento\n\n");
+        printf("Selecione a informacao desejada.:\n1. Inserir no inicio\n2. Inserir no final\n3. Inserir ordernado\n4. Mostrar lista\n5. Remover do inicio\n6. Remover do final\n7. Remover elemento especifico\n8. Buscar elemento\n9. Sair\n\n");
         printf("Opção: ");
         scanf("%d", &escolha);
         switch (escolha) {
@@ -180,11 +203,10 @@ int main()
                 mostrarLista();
                 break;
             case 5:
-                printf("Removido primeiro elemento da lista.\n");
                 removerInicio();
                 break;
             case 6:
-                printf("Removido o ultimo elemento da lista.\n");
+
                 removerFinal();
                 break;
             case 7:
@@ -206,6 +228,9 @@ int main()
 
                 }
                 break;
+             case 9:
+                printf("Até a proxima");
+                return 0;
             default:
                 printf("Opção inválida\n");
                 break;
