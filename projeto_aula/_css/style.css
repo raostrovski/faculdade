@@ -145,17 +145,6 @@ nav a:hover{
     margin-bottom: 10px;
 }
 
-#geral{
-    display: flex;
-    justify-content: center;
-}
-
-#geral section{
-    flex: 2;
-}
-#geral aside{
-    flex: 1;
-}
 .widget_title{
     margin-top: 30px;
     margin-bottom: 20px;

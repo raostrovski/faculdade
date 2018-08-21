@@ -1,0 +1,88 @@
+.container {
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.topo{
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    
+}   
+
+nav li{
+
+    display: inline-block;
+    
+    line-height: 50px;
+}
+
+nav li a {
+
+    margin-left: 20px;
+    text-decoration: none;
+    font-size: 22px;
+
+}
+
+.banner {
+
+    height: 550px;
+    background-image: url(../_img/img1.jpg);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.banner-titulo{
+    height: 194px;
+
+}
+
+.banner-titulo-um {
+    padding: 20px;
+}
+.banner-titulo-dois {
+    padding-left: 30px;
+}
+
+.banner-pai {
+
+    display: flex;
+    justify-content: center;
+}
+
+.banner-filho-um,
+.banner-filho-dois,
+.banner-filho-tres {
+    height: 200px;
+    width: 27.33%;
+    margin-left: 5px;
+    padding-left: 10px;
+    color: #ffffff;
+    
+}
+.banner-filho-um h4,
+.banner-filho-dois h4,
+.banner-filho-tres h4 {
+    text-align: center;
+    height: 50px;
+}
+
+.banner-filho-um{
+    background-color: #39aae1;
+    text-align: center;
+}
+
+.banner-filho-dois{
+    background-color: #0079c7;
+}
+
+.banner-filho-dois li{
+    height: 25px;
+}
+
+
+.banner-filho-tres {
+    background-color: #2b4b99;
+}
