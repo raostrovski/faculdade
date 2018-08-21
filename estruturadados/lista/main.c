@@ -24,12 +24,80 @@ void inserirInicio(int elemen){
 
 }
 
+void inserirFinal(int elemen){
+
+    no *aux = plista;
+    no *auxUltimo;
+    while(aux->prox != NULL){
+        aux = aux->prox;
+    }
+    auxUltimo       = (no*) malloc(sizeof(no));
+    auxUltimo->info = elemen;
+    auxUltimo->prox = aux->prox;
+    aux->prox       = auxUltimo;
+}
+
+void mostrarLista(){
+
+    no *aux = plista;
+    while(aux != NULL){
+        if(aux->prox == NULL){
+            printf("%d", aux->info);
+        } else {
+            printf("%d, ", aux->info);
+        }
+
+        aux = aux->prox;
+    }
+    printf("\n");
+}
+
+void removerInicio(){
+
+    no *aux = plista;
+    aux     = aux->prox;
+    plista  = aux;
+    aux     = NULL;
+
+}
+
+void removerFinal(){
+
+    no *aux = plista;
+    no *auxUltimo = plista;
+    while(aux->prox != NULL){
+        aux = aux->prox;
+
+    }
+
+    while(auxUltimo->prox != aux){
+        auxUltimo = auxUltimo->prox;
+    }
+    auxUltimo->prox = NULL;
+
+}
+
+int buscarElemento(int elemen){
+
+    int posicao = 0;
+    no *aux;
+    for(aux = plista; aux != NULL; aux=aux->prox){
+        posicao++;
+        if(aux->info == elemen){
+            return posicao;
+        }
+    }
+    return 0;
+}
+
+
+
 
 int main()
 {
-    int escolha, valor;
+    int escolha, valor, retornoBusca = 0;
     char encerrar[] = "N";
-    while(strcmp(encerrar,"N") == 0){
+    while((strcmp(encerrar,"N") == 0 || strcmp(encerrar,"n") == 0)){
         printf("Selecione a informacao desejada.:\n1. Inserir no inicio\n2. Inserir no final\n3. Inserir ordernado\n4. Mostrar lista\n5. Remover do inicio\n6. Remover do final\n7. Remover elemento especifico\n8. Buscar elemento\n\n");
         printf("Opção: ");
         scanf("%d", &escolha);
@@ -38,6 +106,37 @@ int main()
                 printf("Selecione o valor que quer inserir: ");
                 scanf("%d", &valor);
                 inserirInicio(valor);
+                break;
+            case 2:
+                printf("Selecione o valor que quer inserir: ");
+                scanf("%d", &valor);
+                inserirFinal(valor);
+                break;
+            case 4:
+                printf("Mostrando a lista formada até agora: \n");
+                mostrarLista();
+                break;
+            case 5:
+                printf("Removido primeiro elemento da lista.\n");
+                removerInicio();
+                break;
+            case 6:
+                printf("Removido o ultimo elemento da lista.\n");
+                removerFinal();
+                break;
+            case 8:
+                printf("Selecione o elemento que deseja procurar: ");
+                scanf("%d", &valor);
+                retornoBusca = buscarElemento(valor);
+                if(retornoBusca == 0){
+
+                    printf("Valor não encontrado.\n");
+
+                } else {
+
+                    printf("Valor localizado na posição: %d\n", retornoBusca);
+
+                }
                 break;
         }
         printf("Deseja encerrar o programa (S ou N): ");
