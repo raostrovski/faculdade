@@ -37,6 +37,38 @@ void inserirFinal(int elemen){
     aux->prox       = auxUltimo;
 }
 
+void inserirOrdenado(int elemen){
+
+    no *aux;
+    no *pesquisa    = plista;
+    no *auxAnterior = plista;
+    if(elemen >= pesquisa->info){
+
+        inserirInicio(elemen);
+
+    } else {
+
+        while(pesquisa->info >= elemen && pesquisa->prox != NULL){
+            pesquisa = pesquisa->prox;
+        }
+        if(pesquisa->prox == NULL){
+
+        inserirFinal(elemen);
+
+        } else {
+
+            aux = (no*) malloc(sizeof(no));
+            aux->info = elemen;
+            aux->prox = pesquisa;
+            while(auxAnterior->prox != pesquisa){
+                auxAnterior = auxAnterior->prox;
+            }
+            auxAnterior->prox = aux;
+        }
+    }
+
+}
+
 void mostrarLista(){
 
     no *aux = plista;
@@ -77,6 +109,32 @@ void removerFinal(){
 
 }
 
+void removerEspecifico(int elemen){
+
+    int posicao = 1;
+    no *aux = plista;
+    no *aux2 = plista;
+    while(posicao != elemen){
+        aux = aux->prox;
+        posicao++;
+    }
+    if(elemen == 1){
+
+        removerInicio();
+
+    } else {
+
+        while(aux2->prox != aux){
+        aux2 = aux2->prox;
+
+        }
+    }
+
+    aux2->prox = aux->prox;
+    aux->prox = NULL;
+
+}
+
 int buscarElemento(int elemen){
 
     int posicao = 0;
@@ -112,6 +170,11 @@ int main()
                 scanf("%d", &valor);
                 inserirFinal(valor);
                 break;
+            case 3:
+                printf("Selecione o valor que quer inserir: ");
+                scanf("%d", &valor);
+                inserirOrdenado(valor);
+                break;
             case 4:
                 printf("Mostrando a lista formada até agora: \n");
                 mostrarLista();
@@ -123,6 +186,11 @@ int main()
             case 6:
                 printf("Removido o ultimo elemento da lista.\n");
                 removerFinal();
+                break;
+            case 7:
+                printf("Qual é o elemento que deseja remover? ");
+                scanf("%d", &valor);
+                removerEspecifico(valor);
                 break;
             case 8:
                 printf("Selecione o elemento que deseja procurar: ");
@@ -137,6 +205,9 @@ int main()
                     printf("Valor localizado na posição: %d\n", retornoBusca);
 
                 }
+                break;
+            default:
+                printf("Opção inválida\n");
                 break;
         }
         printf("Deseja encerrar o programa (S ou N): ");
