@@ -127,20 +127,33 @@ void removerFinal(){
     }
 }
 
+int buscarElemento(int elemen){
+
+    int posicao = 0;
+    no *aux;
+    for(aux = plista; aux != NULL; aux=aux->prox){
+        posicao++;
+        if(aux->info == elemen){
+            return posicao;
+        }
+    }
+    return 0;
+}
+
 void removerEspecifico(int elemen){
 
+    int posicaoElemen = buscarElemento(elemen);
     int posicao = 1;
-    no *aux = plista;
-    no *aux2 = plista;
-    if(aux == NULL){
+    if(posicaoElemen == 0){
 
-        printf("Não existe lista\n");
+        printf("Valor não encontrado");
 
     } else {
-
-        while(posicao != elemen){
-        aux = aux->prox;
-        posicao++;
+        no *aux = plista;
+        no *aux2 = plista;
+        while(posicao != posicaoElemen){
+            aux = aux->prox;
+            posicao++;
         }
         if(elemen == 1){
 
@@ -160,18 +173,6 @@ void removerEspecifico(int elemen){
     }
 }
 
-int buscarElemento(int elemen){
-
-    int posicao = 0;
-    no *aux;
-    for(aux = plista; aux != NULL; aux=aux->prox){
-        posicao++;
-        if(aux->info == elemen){
-            return posicao;
-        }
-    }
-    return 0;
-}
 
 int main()
 {
