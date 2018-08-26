@@ -1,0 +1,89 @@
+CREATE TABLE usuario (
+id INTEGER NOT NULL,
+usuario character varying (10) NOT NULL,
+senha character varying (100) NOT NULL,
+CONSTRAINT pk_usuario PRIMARY KEY(id)
+);
+
+CREATE TABLE paciente (
+id INTEGER NOT NULL,
+nome character varying(100) NOT NULL,
+email character varying(100) NOT NULL,
+cpf CHARACTER VARYING(11) NOT NULL,
+rg CHARACTER VARYING(9) NOT NULL,
+alergias CHARACTER VARYING NOT NULL,
+fumante boolean,
+codUsu INTEGER NOT NULL,
+CONSTRAINT pk_paciente PRIMARY KEY(id),
+CONSTRAINT fk_paciente_usuario FOREIGN KEY (codUsu) REFERENCES usuario(id)
+);
+
+CREATE TABLE medico (
+id INTEGER NOT NULL,
+nome character varying(100) NOT NULL,
+crm character varying(15) NOT NULL,
+email character varying(100) NOT NULL,
+cpf CHARACTER VARYING(11) NOT NULL,
+rg CHARACTER VARYING(9) NOT NULL,
+codUsu INTEGER NOT NULL,
+CONSTRAINT pk_medico PRIMARY KEY(id),
+CONSTRAINT fk_medico_usuario FOREIGN KEY (codUsu) REFERENCES usuario(id)
+);
+
+CREATE TABLE endereco (
+id INTEGER NOT NULL,
+tipo INTEGER NOT NULL,
+idPacMed INTEGER NOT NULL,
+endereco CHARACTER VARYING(100) NOT NULL,
+numero INTEGER NOT NULL,
+compleento CHARACTER VARYING(50) NOT NULL,
+cidade CHARACTER VARYING(50) NOT NULL,
+estado CHARACTER VARYING(50) NOT NULL,
+pais CHARACTER VARYING(50) NOT NULL,
+CONSTRAINT pk_endereco PRIMARY KEY (id, tipo, idPacMed)
+);
+
+CREATE TABLE especialidades (
+id INTEGER NOT NULL,
+nome CHARACTER VARYING(50) NOT NULL,
+descricao CHARACTER VARYING NOT NULL,
+CONSTRAINT pk_especialidade PRIMARY KEY (id)
+);
+
+CREATE TABLE medico_especialidade (
+idMedico INTEGER NOT NULL,
+idEspecialidade INTEGER NOT NULL,
+rqe character varying(50) NOT NULL,
+CONSTRAINT pk_medico_especialidade PRIMARY KEY (idMedico, idEspecialidade, rqe),
+CONSTRAINT fk_medico FOREIGN KEY (idMedico) REFERENCES medico(id),
+CONSTRAINT fk_especialidade FOREIGN KEY (idEspecialidade) REFERENCES especialidades(id)
+);
+
+CREATE TABLE hospital (
+id INTEGER NOT NULL,
+nome CHARACTER VARYING(100) NOT NULL,
+endereco CHARACTER VARYING (100) NOT NULL,
+numero INTEGER NOT NULL,
+cidade CHARACTER VARYING(50) NOT NULL,
+estado CHARACTER VARYING(50) NOT NULL,
+pais CHARACTER VARYING(20) NOT NULL,
+CONSTRAINT pk_hospital PRIMARY KEY (id)
+);
+
+CREATE TABLE medico_hospital (
+idMedico INTEGER NOT NULL,
+idHospital INTEGER NOT NULL,
+CONSTRAINT pk_medico_hospital PRIMARY KEY (idMedico, idHospital),
+CONSTRAINT fk_medico FOREIGN KEY (idMedico) REFERENCES medico(id),
+CONSTRAINT fk_hospital FOREIGN KEY (idHospital) REFERENCES hospital(id)
+);
+
+CREATE TABLE agenda (
+id INTEGER NOT NULL,
+paciente INTEGER NOT NULL,
+medico INTEGER NOT NULL,
+hospital INTEGER NOT NULL,
+dia DATE NOT NULL,
+hora TIME NOT NULL,
+CONSTRAINT pk_agenda PRIMARY KEY (id, paciente, medico, hospital, dia, hora)
+);
