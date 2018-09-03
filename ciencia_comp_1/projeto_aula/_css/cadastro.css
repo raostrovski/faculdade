@@ -1,6 +1,6 @@
-.login-box{
-    height: 260px;
-    width: 380px;
+
+.cadastro-box{
+    display: flex;
     margin: auto;
     background-color: dimgray;
     border-radius: 10px;
@@ -10,8 +10,13 @@
     font-size: 20px;
     padding: 10px;
 }
+form{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
 form h6{
-    text-align: right;
+    text-align: left;
 }
 form button{
     margin-left: 80%;

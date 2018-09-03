@@ -4,12 +4,24 @@
 }
 
 .topo{
-    height: 50px;
+    width: 80%;
+    height: 80px;
+    margin: auto;
+    padding-top: 20px;
     display: flex;
     justify-content: space-between;
     
-}   
-
+}
+.banner-titulo-content{
+    width: 80%;
+    margin: auto;
+}
+.banner-box{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
 nav li{
 
     display: inline-block;
@@ -21,10 +33,14 @@ nav li a {
 
     margin-left: 20px;
     text-decoration: none;
-    font-size: 22px;
+    font-size: 20px;
+    color: black;
 
 }
-
+nav li a:hover{
+    background: cornflowerblue;
+    color: cornsilk;
+}
 .banner {
 
     height: 550px;
@@ -33,32 +49,38 @@ nav li a {
     flex-direction: column;
     justify-content: space-between;
 }
+.banner h2{
+    font-size: 50px;
+    color: #ffffff;
+}
+.banner h4{
+    font-size: 20px;
+    color: #ffffff;
+}
 
 .banner-titulo{
     height: 194px;
 
 }
 
-.banner-titulo-um {
-    padding: 20px;
-}
-.banner-titulo-dois {
-    padding-left: 30px;
+.banner-box{
+    padding: 0;
 }
 
 .banner-pai {
 
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .banner-filho-um,
 .banner-filho-dois,
 .banner-filho-tres {
     height: 200px;
-    width: 27.33%;
+    width: 33%;
     margin-left: 5px;
     padding-left: 10px;
+    padding-bottom: 10px;
     color: #ffffff;
     
 }
@@ -73,6 +95,16 @@ nav li a {
     background-color: #39aae1;
     text-align: center;
 }
+.banner-filho-um input{
+    background: none;
+    border-radius: 10px;
+    height: 50px;
+    width: 100px;
+    border-bottom: solid 1px #ffffff;
+    color: #ffffff;
+    font-size: 17px;
+    cursor: pointer;
+}
 
 .banner-filho-dois{
     background-color: #0079c7;
@@ -85,4 +117,7 @@ nav li a {
 
 .banner-filho-tres {
     background-color: #2b4b99;
+}
+#click{
+    text-decoration: none;
 }

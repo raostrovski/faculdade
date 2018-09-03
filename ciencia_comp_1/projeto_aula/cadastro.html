@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="_css/style2.css" />
+    <link rel="stylesheet" type="text/css" href="_css/cadastro.css" />
+    <title>Cadastro</title>
+</head>
+
+<body>
+<div class="container">
+    <div class="topo">
+        <div class="logo">
+            <a href="index2.html">
+                <img src="_img/logo.png" />
+            </a>
+        </div>
+        <nav>
+            <li>
+                <a href="index2.html">Home</a>
+                <a href="#">Login</a>
+                <a href="#">Contato</a>
+            </li>
+        </nav>
+    </div>
+    <div class="banner">
+        <div class="cadastro-box">
+
+            <div class="input">
+                <form>
+                    <fieldset>
+                        <legend>Dados Pessoais</legend>
+                        <h6>Nome <input type="text" name="txNome" required size="30" maxlength="30" placeholder="Digite aqui..."></h6>
+                        <h6>Sobrenome <input type="text" name="txSobre" required size="30" maxlength="30" placeholder="Digite aqui..."></h6>
+                        <h6>CPF <input type="text" name="txCpf" required size="30" maxlength="30" placeholder="Digite aqui..."></h6>
+                        <h6>Sexo <input type="radio" required class="sexo" name="rdSex" />Masculino<input type="radio" class="sexo" name="rdSex"/> Feminino</h6>
+                        <h6>Data Nascimento <input type="date" name="txData"  required pattern="dd-mm-yyyy" size="30" placeholder="00/00/0000"></h6>
+                        <h6>Email <input type="email" required></h6>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Endereço</legend>
+                        <h6>Rua<input type="text" name="txrua" required size="30" maxlength="30" placeholder="Digite aqui..."></h6>
+                        <h6>Numero <input type="number" name="TxN"  required min="0"> </h6>
+                        <h6>Bairro <input type="text" name="txBairro" required size="30" maxlength="30" placeholder="Digite aqui..."></h6>
+                        <h6>Cidade <input type="text" name="txcidade" required size="30" maxlength="30" placeholder="Digite aqui..."></h6>
+                        <h6>Estado <input type="text" name="txestado" required size="30" maxlength="30" placeholder="Digite aqui..."></h6>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Login</legend>
+                        <h6>Usuario <input type="text" name="txrUser" size="30"  required maxlength="30" placeholder="Digite aqui..."></h6>
+                        <h6>Senha <input type="password" name="senha" size="30" required  maxlength="30" placeholder="Digite aqui..."></h6>
+                        <h6>Confirme a Senha <input type="password" name="confSenha" required  size="30" maxlength="30" placeholder="Digite aqui..."></h6>
+                        <button type="submit" name="butenviar">Enviar</button>
+
+                    </fieldset>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+    <footer>
+
+    </footer>
+</div>
+</body>
+
+</html>
