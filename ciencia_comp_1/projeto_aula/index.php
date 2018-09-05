@@ -1,47 +1,56 @@
-<!DOCTYPE html>
-<html>
-<body>
 <?php
+session_start();
+include "bd.php";
 
-    $host="127.0.0.1";
-    $port=3306;
-    $socket="";
-    $user="root";
-    $password="";
-    $dbname="projectmedicenter";
+$usuario = (isset($_POST["txNome"])) ? $_POST["txNome"] : '';
+$senha   = (isset($_POST["txSenha"])) ? $_POST["txSenha"] : '';
 
-    $con = new mysqli($host, $user, $password, $dbname, $port, $socket)
-    	or die ('Could not connect to the database server' . mysqli_connect_error());
+if(empty($usuario)){
 
-    $usuario = $_POST["txNome"];
-	$senha   = $_POST["txSenha"];
-	
-	$sql       = "SELECT usuario, email, senha FROM usuario WHERE (usuario = '" . $usuario . "') OR (email = '" . $usuario . "')";
-    $resultado = $con->query($sql);
+    $retorno = ['codigo' => 0, 'mensagem' => 'Preencha seu usuario!'];
+    echo json_encode($retorno);
+    exit();
 
-	
-    if($resultado->num_rows > 0){
+}
+if(empty($senha)){
 
-        while($linhas = $resultado->fetch_assoc()){
+    $retorno = ['codigo' => 0, 'mensagem' => 'Preencha a sua senha!'];
+    echo json_encode($retorno);
+    exit();
+}
 
-			if($senha == $linhas["senha"]){
-				
-				echo "VERIFICOU CERTO";
-				
-			} else {
-				
-				echo "<script>alert('TA ERRADO PA CARAI');</script>";
-			}
-        }
+//Valida se $usuario é um email
+if(preg_match('/.*@{1}.*', $usuario) == 1){
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)):
+        $retorno = ['codigo' => 0, 'mensagem' => 'Formato de e-mail inválido!'];
+        echo json_encode($retorno);
+        exit();
+    endif;
+}
 
-    } else {
+//valida as informações com o banco
 
-        echo "Deu certo nao";
 
-    }
+$sql       = "SELECT usuario, email, senha FROM usuario WHERE (usuario = '" . $usuario . "') OR (email = '" . $usuario . "') LIMIT 1";
+$resultado = $con->query($sql);
+$resultado = $resultado->fetch_assoc();
 
-    $con->close();
+if(!empty($resultado) && ($senha == $resultado['senha'])){
+    $_SESSION['id'] = $resultado['usuario'];
+	$_SESSION['email'] = $resultado['email'];
+	$_SESSION['logado'] = 'SIM';
+} else {
+	$_SESSION['logado'] = 'NAO';
+}
+
+if($_SESSION['logado'] == 'SIM'){
+    $retorno = array('codigo' => 1, 'mensagem' => 'Logado com sucesso!');
+	echo json_encode($retorno);
+	exit();
+} else {
+    $retorno = array('codigo' => 0, 'mensagem' => 'Usuario ou senha incorretas!');
+	echo json_encode($retorno);
+	exit();
+}
 
 ?>
-</body>
-</html>

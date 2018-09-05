@@ -1,6 +1,7 @@
 CREATE TABLE usuario (
 id INTEGER NOT NULL,
 usuario character varying (10) NOT NULL,
+email character varying(100) NOT NULL,
 senha character varying (100) NOT NULL,
 CONSTRAINT pk_usuario PRIMARY KEY(id)
 );
@@ -10,9 +11,6 @@ id INTEGER NOT NULL,
 nome character varying(100) NOT NULL,
 email character varying(100) NOT NULL,
 cpf CHARACTER VARYING(11) NOT NULL,
-rg CHARACTER VARYING(9) NOT NULL,
-alergias CHARACTER VARYING NOT NULL,
-fumante boolean,
 codUsu INTEGER NOT NULL,
 CONSTRAINT pk_paciente PRIMARY KEY(id),
 CONSTRAINT fk_paciente_usuario FOREIGN KEY (codUsu) REFERENCES usuario(id)
@@ -24,7 +22,6 @@ nome character varying(100) NOT NULL,
 crm character varying(15) NOT NULL,
 email character varying(100) NOT NULL,
 cpf CHARACTER VARYING(11) NOT NULL,
-rg CHARACTER VARYING(9) NOT NULL,
 codUsu INTEGER NOT NULL,
 CONSTRAINT pk_medico PRIMARY KEY(id),
 CONSTRAINT fk_medico_usuario FOREIGN KEY (codUsu) REFERENCES usuario(id)
@@ -34,9 +31,10 @@ CREATE TABLE endereco (
 id INTEGER NOT NULL,
 tipo INTEGER NOT NULL,
 idPacMed INTEGER NOT NULL,
-endereco CHARACTER VARYING(100) NOT NULL,
+rua CHARACTER VARYING(100) NOT NULL,
+bairro CHARACTER VARYING(100) NOT NULL,
 numero INTEGER NOT NULL,
-compleento CHARACTER VARYING(50) NOT NULL,
+complemento CHARACTER VARYING(50) NOT NULL,
 cidade CHARACTER VARYING(50) NOT NULL,
 estado CHARACTER VARYING(50) NOT NULL,
 pais CHARACTER VARYING(50) NOT NULL,

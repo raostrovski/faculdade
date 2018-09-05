@@ -1,3 +1,10 @@
+<?php
+//session_start();
+ 
+if(isset($_SESSION['logado']) &&  $_SESSION['logado'] == 'SIM'):
+	header("Location: home.html");
+endif;
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -26,38 +33,21 @@
             </li>
         </nav>
     </div>
+    <div id="login-alert">
+        <span id="mensagem"></span>
+    </div>   
     <div class="banner">
         <div class="login-box">
-
-            <div class="input" action="index.php" method="get">
-              <form >
+            <div class="input">
+              <form method="POST" id="login_form" action="index.php" role="form">
                   <fieldset>
                       <legend>Login Usuario</legend>
-                      <h6>Usuario:<input type="text" name="txNome" id="txNome" size="30" maxlength="30" placeholder="Digite seu o nome do usuario ou email"></h6>
-                      <h6>Senha:<input type="password" name="txSenha" size="30" maxlength="30" placeholder="Digite sua senha"></h6>
-                      <button type="submit" name="btenviar" onclick=>Enviar</button>
+                      <h6>Usuario: <input type="text" name="txNome"  size="30" maxlength="30" placeholder="Digite seu o nome do usuario ou email"></h6>
+                      <h6>Senha: <input type="password" name="txSenha" size="30" maxlength="30" placeholder="Digite sua senha"></h6>
+                      <button type="button" name="btenviar" id="btenviar">Enviar</button>
                   </fieldset>
-				
-				<script>
-					
-					
-					function ajaxUsuario(var usuario, var senha) {
-						
-						var ajax = new XMLHttpRequest()
-						ajax.onreadystatechange = function() {
-							if (this.readyState == 4 && this.status == 200){
-								if(let retorno == this.responseText){
-									alert("OK");
-								} else {
-									alert("NOK");
-								}
-							}
-						}
-					}
-						
-				</script>
               </form>
-                <h6>Não sou cadastrado? <a href="cadastro.html"> Cadastre-se grátis!</a></h6>
+                <h6>Não é cadastrado? <a href="cadastro.html"> Cadastre-se grátis!</a></h6>
             </div>
 
         </div>
@@ -66,6 +56,8 @@
 
     </footer>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  
+<script src="_js/custom.js"></script>
 </body>
 
 </html>
